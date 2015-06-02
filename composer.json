@@ -1,0 +1,27 @@
+{
+    "name": "anavallasuiza/laravel-ecommerce",
+    "description": "",
+    "authors": [
+        {
+            "name": "Adrian P. Blunier",
+            "email": "adrian@blunier.net"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "5.0.*",
+        "illuminate/database": "5.0.*"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2.1"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations"
+        ],
+        "psr-4": {
+            "ANavallaSuiza\\Ecommerce\\": "src/ANavallaSuiza/Ecommerce"
+        }
+    },
+    "minimum-stability": "dev"
+}

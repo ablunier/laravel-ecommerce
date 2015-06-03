@@ -4,7 +4,7 @@ namespace ANavallaSuiza\PhpSpec\Eloquent;
 use PhpSpec\ObjectBehavior;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
-class ModelBehavior extends ObjectBehavior
+abstract class ModelBehavior extends ObjectBehavior
 {
     public function let()
     {

@@ -23,5 +23,10 @@
             "ANavallaSuiza\\Ecommerce\\": "src/ANavallaSuiza/Ecommerce"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "ANavallaSuiza\\PhpSpec\\": "spec/ANavallaSuiza/PhpSpec"
+        }
+    },
     "minimum-stability": "dev"
 }

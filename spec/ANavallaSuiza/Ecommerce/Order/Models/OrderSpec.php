@@ -2,10 +2,10 @@
 
 namespace spec\ANavallaSuiza\Ecommerce\Order\Models;
 
-use PhpSpec\ObjectBehavior;
+use ANavallaSuiza\PhpSpec\Eloquent\ModelBehavior;
 use Prophecy\Argument;
 
-class OrderSpec extends ObjectBehavior
+class OrderSpec extends ModelBehavior
 {
     function it_is_initializable()
     {
@@ -16,11 +16,6 @@ class OrderSpec extends ObjectBehavior
     {
         $this->shouldImplement('ANavallaSuiza\Ecommerce\Order\Models\OrderInterface');
     }
-
-    /*function it_has_no_id_by_default()
-    {
-        $this->getId()->shouldReturn(null);
-    }*/
 
     function it_is_not_completed_by_default()
     {

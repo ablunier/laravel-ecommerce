@@ -20,7 +20,7 @@ class OrderItem extends Model implements OrderItemInterface
      */
     public function getQuantity()
     {
-
+        return $this->quantity;
     }
 
     /**
@@ -28,7 +28,9 @@ class OrderItem extends Model implements OrderItemInterface
      */
     public function setQuantity($quantity)
     {
+        $this->quantity = $quantity;
 
+        return $this;
     }
 
     /**
@@ -36,7 +38,7 @@ class OrderItem extends Model implements OrderItemInterface
      */
     public function getUnitPrice()
     {
-
+        return $this->unit_price;
     }
 
     /**
@@ -44,7 +46,9 @@ class OrderItem extends Model implements OrderItemInterface
      */
     public function setUnitPrice($unitPrice)
     {
+        $this->unit_price = $unitPrice;
 
+        return $this;
     }
 
     /**
@@ -52,7 +56,7 @@ class OrderItem extends Model implements OrderItemInterface
      */
     public function getTotal()
     {
-
+        return $this->total;
     }
 
     /**
@@ -60,7 +64,9 @@ class OrderItem extends Model implements OrderItemInterface
      */
     public function setTotal($total)
     {
+        $this->total = $total;
 
+        return $this;
     }
 
     /**

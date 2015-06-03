@@ -151,7 +151,7 @@ class Order extends Model implements OrderInterface
      */
     public function hasItem(OrderItemInterface $item)
     {
-
+        return false;
     }
 
     /**

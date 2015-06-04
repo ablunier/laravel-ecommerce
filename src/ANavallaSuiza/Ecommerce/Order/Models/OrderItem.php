@@ -12,7 +12,15 @@ class OrderItem extends Model implements OrderItemInterface
      */
     public function order()
     {
-        return $this->belongsTo('ANavallaSuiza\Ecommerce\Order\Order');
+        return $this->belongsTo('ANavallaSuiza\Ecommerce\Order\Models\Order');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function product()
+    {
+        return $this->belongsTo('ANavallaSuiza\Ecommerce\Product\Models\Product');
     }
 
     /**

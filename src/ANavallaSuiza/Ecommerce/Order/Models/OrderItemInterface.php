@@ -11,6 +11,13 @@ interface OrderItemInterface
     public function order();
 
     /**
+     * Product Eloquent Relation
+     *
+     * @return Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function product();
+
+    /**
      * Get item quantity.
      *
      * @return int

@@ -9,6 +9,13 @@ class Order extends Model implements OrderInterface
 {
     use SoftDeletes;
 
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'orders';
+
     protected $dates = ['deleted_at', 'completed_at'];
 
     /**

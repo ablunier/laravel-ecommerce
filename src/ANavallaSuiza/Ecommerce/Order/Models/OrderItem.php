@@ -8,6 +8,13 @@ class OrderItem extends Model implements OrderItemInterface
     public $timestamps = false;
 
     /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'orders_items';
+
+    /**
      * {@inheritdoc}
      */
     public function order()

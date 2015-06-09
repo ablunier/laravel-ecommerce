@@ -36,6 +36,8 @@ class StoreServiceProvider extends ServiceProvider
         $this->app->bind('ANavallaSuiza\Ecommerce\Product\Models\ProductInterface', function () {
             return $this->app->make(config('ans-ecommerce.product_model'));
         });
+
+        $this->app->register('Dimsav\Translatable\TranslatableServiceProvider');
     }
 
     /**

@@ -10,14 +10,21 @@
     "require": {
         "php": ">=5.4.0",
         "illuminate/support": "5.0.*",
-        "illuminate/database": "5.0.*"
+        "illuminate/database": "5.0.*",
+        "dimsav/laravel-translatable": "5.1"
     },
     "require-dev": {
+        "orchestra/testbench": "~3.0",
+        "phpunit/phpunit": "~4.0",
         "phpspec/phpspec": "~2.1"
+    },
+    "config": {
+        "bin-dir": "bin/"
     },
     "autoload": {
         "classmap": [
-            "src/migrations"
+            "src/migrations",
+            "tests"
         ],
         "psr-4": {
             "ANavallaSuiza\\Ecommerce\\": "src/ANavallaSuiza/Ecommerce"
@@ -25,7 +32,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "ANavallaSuiza\\PhpSpec\\": "spec/ANavallaSuiza/PhpSpec"
+            "ANavallaSuiza\\PhpSpec\\": "spec/ANavallaSuiza/PhpSpec",
+            "ANavallaSuiza\\Tests\\": "tests"
         }
     },
     "minimum-stability": "dev"

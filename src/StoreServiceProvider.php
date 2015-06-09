@@ -20,7 +20,7 @@ class StoreServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/../../config/config.php' => config_path('ans-ecommerce.php')
+            __DIR__.'/../config/config.php' => config_path('ans-ecommerce.php')
         ]);
     }
 
@@ -31,7 +31,7 @@ class StoreServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../../config/config.php', 'ans-ecommerce');
+        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'ans-ecommerce');
 
         $this->app->bind('ANavallaSuiza\Ecommerce\Product\Models\ProductInterface', function () {
             return $this->app->make(config('ans-ecommerce.product_model'));

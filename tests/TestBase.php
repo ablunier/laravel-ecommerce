@@ -32,7 +32,7 @@ class TestBase extends TestCase
 
     private function resetDatabase()
     {
-        $migrationsPath = 'src/migrations';
+        $migrationsPath = 'migrations';
 
         $artisan = $this->app->make('Illuminate\Contracts\Console\Kernel');
 

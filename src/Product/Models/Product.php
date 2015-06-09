@@ -1,6 +1,7 @@
 <?php
 namespace ANavallaSuiza\Ecommerce\Product\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Dimsav\Translatable\Translatable;
@@ -36,5 +37,45 @@ class Product extends Model implements ProductInterface
     public function isAvailable()
     {
         return new \DateTime() >= $this->available_on;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOptions()
+    {
+
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOptions(Collection $options)
+    {
+
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addOption(OptionInterface $option)
+    {
+
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeOption(OptionInterface $option)
+    {
+
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasOption(OptionInterface $option)
+    {
+
     }
 }

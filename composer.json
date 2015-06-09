@@ -23,11 +23,11 @@
     },
     "autoload": {
         "classmap": [
-            "src/migrations",
+            "migrations",
             "tests"
         ],
         "psr-4": {
-            "ANavallaSuiza\\Ecommerce\\": "src/ANavallaSuiza/Ecommerce"
+            "ANavallaSuiza\\Ecommerce\\": "src"
         }
     },
     "autoload-dev": {

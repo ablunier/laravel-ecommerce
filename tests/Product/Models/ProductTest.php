@@ -7,8 +7,12 @@ use ANavallaSuiza\Ecommerce\Product\Models\ProductInterface;
 
 class ProductTest extends TestBase
 {
-    private function getInstance()
+    private function getInstance($id = null)
     {
+        if (isset($id)) {
+            return Product::find($id);
+        }
+
         return new Product;
     }
 

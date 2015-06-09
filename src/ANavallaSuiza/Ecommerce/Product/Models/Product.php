@@ -21,6 +21,16 @@ class Product extends Model implements ProductInterface
     public $translatedAttributes = ['slug', 'name', 'description', 'meta_keywords', 'meta_description'];
 
     /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->available_on = new \DateTime();
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function isAvailable()

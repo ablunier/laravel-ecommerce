@@ -2,20 +2,15 @@
 namespace ANavallaSuiza\Ecommerce\Product\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Dimsav\Translatable\Translatable;
 
-class OptionValue extends Model implements OptionValueInterface
+class OptionTranslation extends Model
 {
-    use Translatable;
-
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'products_options_values';
+    protected $table = 'products_options_translations';
 
     public $timestamps = false;
-
-    public $translatedAttributes = ['value'];
 }

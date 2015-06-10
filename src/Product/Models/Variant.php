@@ -2,15 +2,20 @@
 namespace ANavallaSuiza\Ecommerce\Product\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Variant extends Model implements VariantInterface
 {
+    use SoftDeletes;
+
     /**
      * The database table used by the model.
      *
      * @var string
      */
     protected $table = 'variants';
+
+    protected $dates = ['deleted_at'];
 
     /**
      * {@inheritdoc}

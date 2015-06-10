@@ -22,6 +22,12 @@ class CreateVariantsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+
+        Schema::table('variants', function (Blueprint $table) {
+            $table->foreign('product_id')
+                ->references('id')->on('products')
+                ->onDelete('cascade');
+        });
     }
 
     /**

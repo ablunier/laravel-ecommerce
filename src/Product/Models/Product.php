@@ -81,7 +81,15 @@ class Product extends Model implements ProductInterface, VariableInterface
      */
     public function hasVariants()
     {
+        $items = $this->variants->filter(function (VariantInterface $variant) {
+            return ! $variant->isMaster();
+        });
 
+        if ($items->isEmpty()) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -89,7 +97,7 @@ class Product extends Model implements ProductInterface, VariableInterface
      */
     public function getVariants()
     {
-
+        return $this->variants;
     }
 
     /**
@@ -97,7 +105,9 @@ class Product extends Model implements ProductInterface, VariableInterface
      */
     public function setVariants(Collection $variants)
     {
+        $this->variants = $variants;
 
+        return $this;
     }
 
     /**
@@ -105,7 +115,12 @@ class Product extends Model implements ProductInterface, VariableInterface
      */
     public function addVariant(VariantInterface $variant)
     {
+        if (! $this->hasVariant($variant)) {
+            $variant->setProduct($this);
+            $this->variants->push($variant);
+        }
 
+        return $this;
     }
 
     /**
@@ -113,7 +128,15 @@ class Product extends Model implements ProductInterface, VariableInterface
      */
     public function removeVariant(VariantInterface $variant)
     {
+        if ($this->hasVariant($variant)) {
+            foreach ($this->variants as $key => $item) {
+                if ($item->getKey() === $variant->getKey()) {
+                    $this->variants->forget($key);
+                }
+            }
+        }
 
+        return $this;
     }
 
     /**
@@ -121,7 +144,7 @@ class Product extends Model implements ProductInterface, VariableInterface
      */
     public function hasVariant(VariantInterface $variant)
     {
-
+        return $this->variants->contains($variant);
     }
 
     /**

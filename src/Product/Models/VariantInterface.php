@@ -4,6 +4,13 @@ namespace ANavallaSuiza\Ecommerce\Product\Models;
 interface VariantInterface
 {
     /**
+     * Get element key.
+     *
+     * @return mixed
+     */
+    public function getKey();
+
+    /**
      * Checks whether variant is master.
      *
      * @return Boolean

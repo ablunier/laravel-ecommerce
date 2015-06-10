@@ -13,7 +13,7 @@ class Variant extends Model implements VariantInterface
      *
      * @var string
      */
-    protected $table = 'variants';
+    protected $table = 'products_variants';
 
     protected $dates = ['deleted_at'];
 

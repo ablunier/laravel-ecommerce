@@ -152,7 +152,7 @@ class Product extends Model implements ProductInterface, VariableInterface
      */
     public function hasOptions()
     {
-
+        return (! $this->options->isEmpty());
     }
 
     /**
@@ -160,7 +160,7 @@ class Product extends Model implements ProductInterface, VariableInterface
      */
     public function getOptions()
     {
-
+        return $this->options;
     }
 
     /**
@@ -168,6 +168,9 @@ class Product extends Model implements ProductInterface, VariableInterface
      */
     public function setOptions(Collection $options)
     {
+        $this->options = $options;
+
+        return $this;
 
     }
 
@@ -176,7 +179,11 @@ class Product extends Model implements ProductInterface, VariableInterface
      */
     public function addOption(OptionInterface $option)
     {
+        if (! $this->hasOption($option)) {
+            $this->options->push($option);
+        }
 
+        return $this;
     }
 
     /**
@@ -184,7 +191,15 @@ class Product extends Model implements ProductInterface, VariableInterface
      */
     public function removeOption(OptionInterface $option)
     {
+        if ($this->hasOption($option)) {
+            foreach ($this->options as $key => $item) {
+                if ($item->getKey() === $option->getKey()) {
+                    $this->options->forget($key);
+                }
+            }
+        }
 
+        return $this;
     }
 
     /**
@@ -192,6 +207,6 @@ class Product extends Model implements ProductInterface, VariableInterface
      */
     public function hasOption(OptionInterface $option)
     {
-
+        return $this->options->contains($option);
     }
 }

@@ -1,8 +1,6 @@
 <?php
 namespace ANavallaSuiza\Ecommerce\Product\Models;
 
-use Illuminate\Database\Eloquent\Collection;
-
 interface ProductInterface
 {
     /**

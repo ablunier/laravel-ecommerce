@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateVariantsTable extends Migration
+class CreateProductsVariantsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateVariantsTable extends Migration
      */
     public function up()
     {
-        Schema::create('variants', function (Blueprint $table) {
+        Schema::create('products_variants', function (Blueprint $table) {
             $table->increments('id');
 
             $table->boolean('master');
@@ -23,7 +23,7 @@ class CreateVariantsTable extends Migration
             $table->softDeletes();
         });
 
-        Schema::table('variants', function (Blueprint $table) {
+        Schema::table('products_variants', function (Blueprint $table) {
             $table->foreign('product_id')
                 ->references('id')->on('products')
                 ->onDelete('cascade');
@@ -37,6 +37,6 @@ class CreateVariantsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('variants');
+        Schema::dropIfExists('products_variants');
     }
 }

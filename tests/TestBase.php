@@ -6,6 +6,8 @@ use DB;
 
 class TestBase extends TestCase
 {
+    const MIGRATIONS_PATH = 'migrations';
+
     public function setUp()
     {
         parent::setUp();
@@ -32,13 +34,11 @@ class TestBase extends TestCase
 
     private function resetDatabase()
     {
-        $migrationsPath = 'migrations';
-
         $artisan = $this->app->make('Illuminate\Contracts\Console\Kernel');
 
         // Makes sure the migrations table is created
         $artisan->call('migrate', [
-            '--path'     => $migrationsPath,
+            '--path'     => self::MIGRATIONS_PATH,
         ]);
 
         // We empty all tables
@@ -46,14 +46,16 @@ class TestBase extends TestCase
 
         // Migrate
         $artisan->call('migrate', [
-            '--path'     => $migrationsPath,
+            '--path'     => self::MIGRATIONS_PATH,
         ]);
     }
 
-    public function testRunningMigration()
+    public function test_running_migration()
     {
         $migrations = DB::select('SELECT * FROM migrations');
 
-        $this->assertCount(3, $migrations);
+        $fi = new \FilesystemIterator(self::MIGRATIONS_PATH, \FilesystemIterator::SKIP_DOTS);
+
+        $this->assertCount(iterator_count($fi), $migrations);
     }
 }

@@ -34,7 +34,7 @@ class Order extends Model implements OrderInterface
      */
     public function items()
     {
-        return $this->hasMany('ANavallaSuiza\Ecommerce\Order\OrderItem');
+        return $this->hasMany('ANavallaSuiza\Ecommerce\Order\Models\OrderItem');
     }
 
     /**

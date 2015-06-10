@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Dimsav\Translatable\Translatable;
 
-class Product extends Model implements ProductInterface
+class Product extends Model implements ProductInterface, VariableInterface
 {
     use SoftDeletes, Translatable;
 
@@ -26,9 +26,9 @@ class Product extends Model implements ProductInterface
      */
     public function __construct()
     {
-        parent::__construct();
-
         $this->available_on = new \DateTime();
+
+        parent::__construct();
     }
 
     /**
@@ -37,6 +37,99 @@ class Product extends Model implements ProductInterface
     public function isAvailable()
     {
         return new \DateTime() >= $this->available_on;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function variants()
+    {
+        return $this->hasMany('ANavallaSuiza\Ecommerce\Product\Models\Variant');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMasterVariant()
+    {
+        foreach ($this->variants as $variant) {
+            if ($variant->isMaster()) {
+                return $variant;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setMasterVariant(VariantInterface $variant)
+    {
+        $variant->setMaster(true);
+
+        if (! $this->variants->contains($variant)) {
+            $variant->setProduct($this);
+            $this->variants->push($variant);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasVariants()
+    {
+
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getVariants()
+    {
+
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setVariants(Collection $variants)
+    {
+
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addVariant(VariantInterface $variant)
+    {
+
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeVariant(VariantInterface $variant)
+    {
+
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasVariant(VariantInterface $variant)
+    {
+
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasOptions()
+    {
+
     }
 
     /**

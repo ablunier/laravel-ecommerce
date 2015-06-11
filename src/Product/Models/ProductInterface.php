@@ -9,4 +9,12 @@ interface ProductInterface
      * @return bool
      */
     public function isAvailable();
+
+    /**
+     * Save the model to the database.
+     *
+     * @param  array  $options
+     * @return bool
+     */
+    public function save(array $options = array());
 }

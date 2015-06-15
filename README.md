@@ -1,5 +1,7 @@
 # Laravel e-commerce [![Build Status](https://travis-ci.org/ablunier/laravel-ecommerce.svg?branch=master)](https://travis-ci.org/ablunier/laravel-ecommerce)
 
+This package is a full featured e-commerce platform written for the Laravel PHP framework. It is designed to make programming commerce applications easier by making several assumptions about what most developers needs to get started.
+
 ### Features
 * Full featured flexible e-commerce.
 * Simple API.

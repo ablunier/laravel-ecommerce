@@ -15,5 +15,5 @@ class Option extends Model implements OptionInterface
      */
     protected $table = 'products_options';
 
-    public $translatedAttributes = ['name'];
+    public $translatedAttributes = ['presentation'];
 }

@@ -15,6 +15,8 @@ class CreateProductsOptionsTable extends Migration
         Schema::create('products_options', function (Blueprint $table) {
             $table->increments('id');
 
+            $table->string('name');
+
             $table->unsignedInteger('product_id');
 
             $table->timestamps();
@@ -26,7 +28,7 @@ class CreateProductsOptionsTable extends Migration
             $table->unsignedInteger('product_option_id');
             $table->string('locale')->index();
 
-            $table->string('name');
+            $table->string('presentation');
 
             $table->unique(['product_option_id','locale']);
         });

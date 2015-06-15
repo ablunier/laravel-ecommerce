@@ -14,6 +14,8 @@ class CreateProductsAttributesTable extends Migration
     {
         Schema::create('products_attributes', function (Blueprint $table) {
             $table->increments('id');
+
+            $table->string('name');
         });
 
         Schema::create('products_attributes_translations', function (Blueprint $table) {
@@ -22,7 +24,7 @@ class CreateProductsAttributesTable extends Migration
             $table->unsignedInteger('product_attribute_id');
             $table->string('locale')->index();
 
-            $table->string('name');
+            $table->string('presentation');
 
             $table->unique(['product_attribute_id','locale']);
         });

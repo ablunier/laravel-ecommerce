@@ -22,7 +22,7 @@ After updating composer, add the ServiceProvider to the providers array in `conf
 'ANavallaSuiza\Ecommerce\StoreServiceProvider',
 ```
 
-To publish the config settings in Laravel 5 use:
+To publish the config settings and migrations in Laravel 5 use:
 
 ```php
 php artisan vendor:publish

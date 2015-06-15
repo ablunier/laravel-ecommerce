@@ -20,13 +20,6 @@ interface VariableInterface
     public function setMasterVariant(VariantInterface $variant);
 
     /**
-     * Variant Eloquent Relation
-     *
-     * @return Illuminate\Database\Eloquent\Relations\Relation
-     */
-    public function variants();
-
-    /**
      * Has any variants?
      * This method is not for checking if object has any variations.
      * It should determine if any variants (other than internal master) exist.

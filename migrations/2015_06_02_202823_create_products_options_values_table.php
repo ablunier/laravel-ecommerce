@@ -35,7 +35,7 @@ class CreateProductsOptionsValuesTable extends Migration
                 ->onDelete('cascade');
         });
 
-        Schema::table('products_translations', function (Blueprint $table) {
+        Schema::table('products_options_values_translations', function (Blueprint $table) {
             $table->foreign('product_option_value_id')
                 ->references('id')->on('products_options_values')
                 ->onDelete('cascade');

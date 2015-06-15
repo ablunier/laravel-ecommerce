@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Dimsav\Translatable\Translatable;
 
-class Product extends Model implements ProductInterface, VariableInterface
+class Product extends Model implements ProductInterface, VariableInterface, AttributeSubjectInterface
 {
     use SoftDeletes, Translatable;
 
@@ -39,12 +39,19 @@ class Product extends Model implements ProductInterface, VariableInterface
         return new \DateTime() >= $this->available_on;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function variants()
     {
         return $this->hasMany('ANavallaSuiza\Ecommerce\Product\Models\Variant');
+    }
+
+    public function options()
+    {
+        return $this->hasMany('ANavallaSuiza\Ecommerce\Product\Models\Option');
+    }
+
+    public function attributes()
+    {
+        return $this->hasMany('ANavallaSuiza\Ecommerce\Product\Models\AttributeValue');
     }
 
     /**
@@ -208,5 +215,61 @@ class Product extends Model implements ProductInterface, VariableInterface
     public function hasOption(OptionInterface $option)
     {
         return $this->options->contains($option);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAttributes()
+    {
+
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAttributes(Collection $attributes)
+    {
+
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addAttribute(AttributeValueInterface $attribute)
+    {
+
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeAttribute(AttributeValueInterface $attribute)
+    {
+
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasAttribute(AttributeValueInterface $attribute)
+    {
+
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasAttributeByName($attributeName)
+    {
+
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAttributeByName($attributeName)
+    {
+
     }
 }

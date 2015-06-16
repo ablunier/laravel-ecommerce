@@ -4,6 +4,13 @@ namespace ANavallaSuiza\Ecommerce\Product\Models;
 interface PropertyValueInterface
 {
     /**
+     * Get element key.
+     *
+     * @return mixed
+     */
+    public function getKey();
+
+    /**
      * Get subject.
      *
      * @return PropertySubjectInterface

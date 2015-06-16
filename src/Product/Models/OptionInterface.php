@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Collection;
 interface OptionInterface
 {
     /**
+     * Get element key.
+     *
+     * @return mixed
+     */
+    public function getKey();
+
+    /**
      * Returns all option values.
      *
      * @return Collection|OptionValueInterface[]

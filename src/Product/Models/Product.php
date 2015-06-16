@@ -230,7 +230,7 @@ class Product extends Model implements ProductInterface, VariableInterface, Prop
      */
     public function setProperties(Collection $properties)
     {
-
+        $this->properties = $properties;
     }
 
     /**
@@ -238,7 +238,12 @@ class Product extends Model implements ProductInterface, VariableInterface, Prop
      */
     public function addProperty(PropertyValueInterface $property)
     {
+        if (! $this->hasProperty($property)) {
+            $property->setProduct($this);
+            $this->properties->push($property);
+        }
 
+        return $this;
     }
 
     /**
@@ -246,7 +251,15 @@ class Product extends Model implements ProductInterface, VariableInterface, Prop
      */
     public function removeProperty(PropertyValueInterface $property)
     {
+        if ($this->hasProperty($property)) {
+            foreach ($this->properties as $key => $item) {
+                if ($item->getKey() === $property->getKey()) {
+                    $this->properties->forget($key);
+                }
+            }
+        }
 
+        return $this;
     }
 
     /**
@@ -254,7 +267,7 @@ class Product extends Model implements ProductInterface, VariableInterface, Prop
      */
     public function hasProperty(PropertyValueInterface $property)
     {
-
+        return $this->properties->contains($property);
     }
 
     /**

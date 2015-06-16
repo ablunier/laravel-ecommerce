@@ -68,9 +68,24 @@ class ProductTest extends TestBase
         $this->assertFalse($this->product->isAvailable());
     }
 
-    function test_initializes_property_collection_by_default()
+    public function test_initializes_property_collection_by_default()
     {
         $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $this->product->getProperties());
+    }
+
+    public function test_adds_removes_property()
+    {
+        $property = Mockery::mock('ANavallaSuiza\Ecommerce\Product\Models\PropertyValue');
+        $property->shouldReceive('setProduct')->once()->with($this->product);
+        $property->shouldReceive('getKey')->andReturn(1);
+
+        $this->product->addProperty($property);
+
+        $this->assertTrue($this->product->hasProperty($property));
+
+        $this->product->removeProperty($property);
+
+        $this->assertFalse($this->product->hasProperty($property));
     }
 
     public function test_should_not_have_master_variant_by_default()
@@ -96,7 +111,7 @@ class ProductTest extends TestBase
         $variant->shouldReceive('isMaster')->times(2)->andReturn(true);
         $variant->shouldReceive('setProduct')->times(2)->with($this->product);
         $variant->shouldReceive('setMaster')->times(2)->with(true);
-        $variant->shouldReceive('getKey')->once(1)->andReturn(null);
+        $variant->shouldReceive('getKey')->once()->andReturn(null);
 
         $this->product->setMasterVariant($variant);
         $this->product->setMasterVariant($variant);
@@ -109,7 +124,7 @@ class ProductTest extends TestBase
         $this->assertFalse($this->product->hasVariants());
     }
 
-    public function test_add_remove_variant()
+    public function test_adds_removes_variant()
     {
         $variant = Mockery::mock('ANavallaSuiza\Ecommerce\Product\Models\Variant');
         $variant->shouldReceive('isMaster')->once()->andReturn(false);
@@ -128,5 +143,39 @@ class ProductTest extends TestBase
     public function test_should_initialize_variants_collection_by_default()
     {
         $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $this->product->getVariants());
+    }
+
+    public function test_should_initialize_option_collection_by_default()
+    {
+        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $this->product->getOptions());
+    }
+
+    public function test_hasOptions_should_return_false_if_no_options_defined()
+    {
+        $this->assertFalse($this->product->hasOptions());
+    }
+
+    public function test_hasOptions_should_return_true_only_if_any_options_defined()
+    {
+        $option = Mockery::mock('ANavallaSuiza\Ecommerce\Product\Models\Option');
+        $option->shouldReceive('getKey')->andReturn(1);
+
+        $this->product->addOption($option);
+
+        $this->assertTrue($this->product->hasOptions());
+    }
+
+    public function test_adds_removes_option()
+    {
+        $option = Mockery::mock('ANavallaSuiza\Ecommerce\Product\Models\Option');
+        $option->shouldReceive('getKey')->andReturn(1);
+
+        $this->product->addOption($option);
+
+        $this->assertTrue($this->product->hasOption($option));
+
+        $this->product->removeOption($option);
+
+        $this->assertFalse($this->product->hasOption($option));
     }
 }

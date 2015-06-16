@@ -57,6 +57,58 @@ class Product extends Model implements ProductInterface, VariableInterface, Prop
     /**
      * {@inheritdoc}
      */
+    public function getSku()
+    {
+        return $this->getMasterVariant()->getSku();
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function setSku($sku)
+    {
+        $this->getMasterVariant()->setSku($sku);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getImages()
+    {
+        return $this->getMasterVariant()->getImages();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getImage()
+    {
+        return $this->getMasterVariant()->getImages()->first();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPrice()
+    {
+        return $this->getMasterVariant()->getPrice();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPrice($price)
+    {
+        $this->getMasterVariant()->setPrice($price);
+
+        return $this;
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
     public function getMasterVariant()
     {
         foreach ($this->variants as $variant) {

@@ -17,4 +17,32 @@ interface ProductInterface
      * @return bool
      */
     public function save(array $options = array());
+
+    /**
+     * Get product SKU.
+     *
+     * @return string
+     */
+    public function getSku();
+
+    /**
+     * Set product SKU.
+     *
+     * @param string $sku
+     */
+    public function setSku($sku);
+
+    /**
+     * Get all product images.
+     *
+     * @return Collection|ImageInterface[]
+     */
+    public function getImages();
+
+    /**
+     * Get product main image.
+     *
+     * @return ImageInterface
+     */
+    public function getImage();
 }

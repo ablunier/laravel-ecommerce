@@ -1,7 +1,10 @@
 <?php
 namespace ANavallaSuiza\Ecommerce\Product\Models;
 
-interface VariantInterface
+use ANavallaSuiza\Ecommerce\Inventory\Models\StockableInterface;
+use ANavallaSuiza\Ecommerce\Pricing\Models\PriceableInterface;
+
+interface VariantInterface extends StockableInterface, PriceableInterface
 {
     /**
      * Get element key.
@@ -84,4 +87,42 @@ interface VariantInterface
      * @param VariantInterface $masterVariant
      */
     public function setDefaults(VariantInterface $masterVariant);
+
+    /**
+     * Get images.
+     *
+     * @return Collection|ImageInterface[]
+     */
+    public function getImages();
+
+    /**
+     * Get variant main image if any.
+     * Fall-back on product master variant
+     *
+     * @return ImageInterface
+     */
+    public function getImage();
+
+    /**
+     * Checks if product has image.
+     *
+     * @param ImageInterface $image
+     *
+     * @return bool
+     */
+    public function hasImage(ImageInterface $image);
+
+    /**
+     * Add image.
+     *
+     * @param ImageInterface $image
+     */
+    public function addImage(ImageInterface $image);
+
+    /**
+     * Remove image.
+     *
+     * @param ImageInterface $image
+     */
+    public function removeImage(ImageInterface $image);
 }

@@ -23,10 +23,24 @@ class CreateProductsVariantsTable extends Migration
             $table->softDeletes();
         });
 
+        Schema::create('products_variants_options_values', function (Blueprint $table) {
+            $table->unsignedInteger('product_variant_id');
+            $table->unsignedInteger('product_option_value_id');
+        });
+
         Schema::table('products_variants', function (Blueprint $table) {
             $table->foreign('product_id')
                 ->references('id')->on('products')
                 ->onDelete('cascade');
+        });
+
+        Schema::table('products_variants_options_values', function (Blueprint $table) {
+            $table->foreign('product_variant_id')
+                ->references('id')->on('products_variants')
+                ->onDelete('cascade');
+
+            $table->foreign('product_option_value_id')
+                ->references('id')->on('products_options_values');
         });
     }
 
@@ -37,6 +51,7 @@ class CreateProductsVariantsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('products_variants_options_values');
         Schema::dropIfExists('products_variants');
     }
 }

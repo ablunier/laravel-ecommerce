@@ -17,12 +17,22 @@ class Variant extends Model implements VariantInterface
 
     protected $dates = ['deleted_at'];
 
+    public function product()
+    {
+        return $this->belongsTo('ANavallaSuiza\Ecommerce\Product\Models\Product');
+    }
+
+    public function options()
+    {
+        return $this->belongsToMany('ANavallaSuiza\Ecommerce\Product\Models\OptionValue', 'products_variants_options_values', 'product_variant_id', 'product_option_value_id');
+    }
+
     /**
      * {@inheritdoc}
      */
     public function isMaster()
     {
-        return $this->master;
+        return is_null($this->master) ? false : $this->master;
     }
 
     /**
@@ -40,7 +50,7 @@ class Variant extends Model implements VariantInterface
      */
     public function getProduct()
     {
-
+        return $this->product;
     }
 
     /**
@@ -48,7 +58,9 @@ class Variant extends Model implements VariantInterface
      */
     public function setProduct(ProductInterface $product = null)
     {
+        $this->product()->associate($product);
 
+        return $this;
     }
 
     /**
@@ -56,7 +68,7 @@ class Variant extends Model implements VariantInterface
      */
     public function getOptions()
     {
-
+        return $this->options;
     }
 
     /**
@@ -64,7 +76,9 @@ class Variant extends Model implements VariantInterface
      */
     public function setOptions(Collection $options)
     {
+        $this->options = $options;
 
+        return $this;
     }
 
     /**
@@ -72,7 +86,11 @@ class Variant extends Model implements VariantInterface
      */
     public function addOption(OptionValueInterface $option)
     {
+        if (! $this->hasOption($option)) {
+            $this->options->push($option);
+        }
 
+        return $this;
     }
 
     /**
@@ -80,7 +98,15 @@ class Variant extends Model implements VariantInterface
      */
     public function removeOption(OptionValueInterface $option)
     {
+        if ($this->hasOption($option)) {
+            foreach ($this->options as $key => $item) {
+                if ($item->getKey() === $option->getKey()) {
+                    $this->options->forget($key);
+                }
+            }
+        }
 
+        return $this;
     }
 
     /**
@@ -88,7 +114,7 @@ class Variant extends Model implements VariantInterface
      */
     public function hasOption(OptionValueInterface $option)
     {
-
+        return $this->options->contains($option);
     }
 
     /**
@@ -96,6 +122,14 @@ class Variant extends Model implements VariantInterface
      */
     public function setDefaults(VariantInterface $masterVariant)
     {
+        if (! $masterVariant->isMaster()) {
+            throw new \InvalidArgumentException('Cannot inherit values from non master variant.');
+        }
 
+        if ($this->isMaster()) {
+            throw new \LogicException('Master variant cannot inherit from another master variant.');
+        }
+
+        return $this;
     }
 }

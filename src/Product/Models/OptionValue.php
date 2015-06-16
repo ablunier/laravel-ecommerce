@@ -38,5 +38,7 @@ class OptionValue extends Model implements OptionValueInterface
     public function setOption(OptionInterface $option = null)
     {
         $this->option()->associate($option);
+
+        return $this;
     }
 }

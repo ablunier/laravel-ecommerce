@@ -15,5 +15,5 @@ interface OptionValueInterface
      *
      * @param OptionInterface $option
      */
-    public function setOption(OptionInterface $option = null);
+    public function setOption(OptionInterface $option);
 }

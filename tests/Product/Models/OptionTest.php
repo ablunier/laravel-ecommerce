@@ -30,7 +30,7 @@ class OptionTest extends TestBase
         return new Option;
     }
 
-    public function test_implement_option_interface()
+    public function test_implement_option_value_interface()
     {
         $this->assertInstanceOf('ANavallaSuiza\Ecommerce\Product\Models\OptionInterface', $this->option);
     }

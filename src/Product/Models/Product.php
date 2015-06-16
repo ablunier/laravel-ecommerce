@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Dimsav\Translatable\Translatable;
 
-class Product extends Model implements ProductInterface, VariableInterface, AttributeSubjectInterface
+class Product extends Model implements ProductInterface, VariableInterface, PropertySubjectInterface
 {
     use SoftDeletes, Translatable;
 
@@ -49,9 +49,9 @@ class Product extends Model implements ProductInterface, VariableInterface, Attr
         return $this->hasMany('ANavallaSuiza\Ecommerce\Product\Models\Option');
     }
 
-    public function attributes()
+    public function properties()
     {
-        return $this->hasMany('ANavallaSuiza\Ecommerce\Product\Models\AttributeValue');
+        return $this->hasMany('ANavallaSuiza\Ecommerce\Product\Models\PropertyValue');
     }
 
     /**
@@ -220,7 +220,15 @@ class Product extends Model implements ProductInterface, VariableInterface, Attr
     /**
      * {@inheritdoc}
      */
-    public function getAttributes()
+    public function getProperties()
+    {
+        return $this->properties;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setProperties(Collection $properties)
     {
 
     }
@@ -228,7 +236,7 @@ class Product extends Model implements ProductInterface, VariableInterface, Attr
     /**
      * {@inheritdoc}
      */
-    public function setAttributes(Collection $attributes)
+    public function addProperty(PropertyValueInterface $property)
     {
 
     }
@@ -236,7 +244,7 @@ class Product extends Model implements ProductInterface, VariableInterface, Attr
     /**
      * {@inheritdoc}
      */
-    public function addAttribute(AttributeValueInterface $attribute)
+    public function removeProperty(PropertyValueInterface $property)
     {
 
     }
@@ -244,7 +252,7 @@ class Product extends Model implements ProductInterface, VariableInterface, Attr
     /**
      * {@inheritdoc}
      */
-    public function removeAttribute(AttributeValueInterface $attribute)
+    public function hasProperty(PropertyValueInterface $property)
     {
 
     }
@@ -252,7 +260,7 @@ class Product extends Model implements ProductInterface, VariableInterface, Attr
     /**
      * {@inheritdoc}
      */
-    public function hasAttribute(AttributeValueInterface $attribute)
+    public function hasPropertyByName($propertyName)
     {
 
     }
@@ -260,15 +268,7 @@ class Product extends Model implements ProductInterface, VariableInterface, Attr
     /**
      * {@inheritdoc}
      */
-    public function hasAttributeByName($attributeName)
-    {
-
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAttributeByName($attributeName)
+    public function getPropertyByName($propertyName)
     {
 
     }

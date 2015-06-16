@@ -16,8 +16,7 @@
     "require-dev": {
         "orchestra/testbench": "~3.0",
         "phpunit/phpunit": "~4.0",
-        "mockery/mockery": "0.9.*",
-        "phpspec/phpspec": "~2.1"
+        "mockery/mockery": "0.9.*"
     },
     "config": {
         "bin-dir": "bin/"
@@ -33,7 +32,6 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "ANavallaSuiza\\PhpSpec\\": "spec/ANavallaSuiza/PhpSpec",
             "ANavallaSuiza\\Tests\\": "tests"
         }
     },

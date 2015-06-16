@@ -1,35 +1,35 @@
 <?php
 namespace ANavallaSuiza\Ecommerce\Product\Models;
 
-interface AttributeValueInterface
+interface PropertyValueInterface
 {
     /**
      * Get subject.
      *
-     * @return AttributeSubjectInterface
+     * @return PropertySubjectInterface
      */
     public function getSubject();
 
     /**
      * Set subject.
      *
-     * @param AttributeSubjectInterface|null $subject
+     * @param PropertySubjectInterface|null $subject
      */
-    public function setSubject(AttributeSubjectInterface $subject);
+    public function setSubject(PropertySubjectInterface $subject);
 
     /**
      * Get attribute.
      *
-     * @return AttributeInterface
+     * @return PropertyInterface
      */
-    public function getAttribute();
+    public function getProperty();
 
     /**
      * Set attribute.
      *
-     * @param AttributeInterface $attribute
+     * @param PropertyInterface $attribute
      */
-    public function setAttribute(AttributeInterface $attribute);
+    public function setProperty(PropertyInterface $attribute);
 
     /**
      * Get attribute value.

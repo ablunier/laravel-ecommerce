@@ -3,14 +3,14 @@ namespace ANavallaSuiza\Ecommerce\Product\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AttributeValue extends Model implements AttributeValueInterface
+class PropertyValue extends Model implements PropertyValueInterface
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'products_attributes_values';
+    protected $table = 'products_properties_values';
 
     public $timestamps = false;
 
@@ -19,9 +19,9 @@ class AttributeValue extends Model implements AttributeValueInterface
         return $this->belongsTo('ANavallaSuiza\Ecommerce\Product\Models\Product');
     }
 
-    public function attribute()
+    public function property()
     {
-        return $this->belongsTo('ANavallaSuiza\Ecommerce\Product\Models\Attribute');
+        return $this->belongsTo('ANavallaSuiza\Ecommerce\Product\Models\Property');
     }
 
     /**
@@ -35,7 +35,7 @@ class AttributeValue extends Model implements AttributeValueInterface
     /**
      * {@inheritdoc}
      */
-    public function setSubject(AttributeSubjectInterface $subject)
+    public function setSubject(PropertySubjectInterface $subject)
     {
         $this->product()->associate($subject);
 
@@ -45,17 +45,17 @@ class AttributeValue extends Model implements AttributeValueInterface
     /**
      * {@inheritdoc}
      */
-    public function getAttribute()
+    public function getProperty()
     {
-        return $this->attribute;
+        return $this->property;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setAttribute(AttributeInterface $attribute)
+    public function setProperty(PropertyInterface $property)
     {
-        $this->attribute()->associate($attribute);
+        $this->property()->associate($property);
     }
 
     /**

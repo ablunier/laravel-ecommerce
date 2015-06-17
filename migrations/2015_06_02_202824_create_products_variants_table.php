@@ -16,6 +16,13 @@ class CreateProductsVariantsTable extends Migration
             $table->increments('id');
 
             $table->boolean('master');
+            $table->string('sku');
+            $table->integer('price');
+            $table->integer('on_hand');
+            $table->decimal('weight')->nullable();
+            $table->decimal('width')->nullable();
+            $table->decimal('height')->nullable();
+            $table->decimal('depth')->nullable();
 
             $table->unsignedInteger('product_id');
 

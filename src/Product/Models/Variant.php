@@ -27,6 +27,11 @@ class Variant extends Model implements VariantInterface
         return $this->belongsToMany('ANavallaSuiza\Ecommerce\Product\Models\OptionValue', 'products_variants_options_values', 'product_variant_id', 'product_option_value_id');
     }
 
+    public function images()
+    {
+        return $this->hasMany('ANavallaSuiza\Ecommerce\Product\Models\Image');
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -129,6 +134,154 @@ class Variant extends Model implements VariantInterface
         if ($this->isMaster()) {
             throw new \LogicException('Master variant cannot inherit from another master variant.');
         }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getImage()
+    {
+        if ($this->images->isEmpty()) {
+            return $this->getProduct()->getImage();
+        }
+
+        return $this->images->first();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasImage(ImageInterface $image)
+    {
+        return $this->images->contains($image);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addImage(ImageInterface $image)
+    {
+        if (! $this->hasImage($image)) {
+            $this->images->push($image);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeImage(ImageInterface $image)
+    {
+        if ($this->hasImage($image)) {
+            foreach ($this->images as $key => $item) {
+                if ($item->getKey() === $image->getKey()) {
+                    $this->images->forget($key);
+                }
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSku()
+    {
+        return $this->sku;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getInventoryName()
+    {
+        return $this->getProduct()->getName();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isInStock()
+    {
+        return 0 < $this->on_hand;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isAvailableOnDemand()
+    {
+
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOnHold()
+    {
+
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOnHold($onHold)
+    {
+
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOnHand()
+    {
+        return $this->on_hand;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOnHand($onHand)
+    {
+        $this->on_hand = $onHand;
+
+        if (0 > $this->on_hand) {
+            $this->on_hand = 0;
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPrice($price)
+    {
+        if (! is_int($price)) {
+            throw new \InvalidArgumentException('Price must be an integer.');
+        }
+
+        $this->price = $price;
 
         return $this;
     }

@@ -2,6 +2,8 @@
 
 This package is a full featured e-commerce platform written for the Laravel PHP framework. It is designed to make programming commerce applications easier by making several assumptions about what most developers needs to get started.
 
+> **Note:** This package is in active development and NOT ready for production.
+
 ### Features
 * Full featured flexible e-commerce.
 * Simple API.

@@ -19,6 +19,7 @@ class CreateProductsVariantsTable extends Migration
             $table->string('sku');
             $table->integer('price');
             $table->integer('on_hand');
+            $table->boolean('available_on_demand');
             $table->decimal('weight')->nullable();
             $table->decimal('width')->nullable();
             $table->decimal('height')->nullable();

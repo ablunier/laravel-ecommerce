@@ -101,4 +101,19 @@ class VariantTest extends TestBase
 
         $this->variant->setDefaults($variant);
     }
+
+    public function test_price_should_accept_only_integer()
+    {
+        $this->variant->setPrice(410);
+
+        $this->isType('int', $this->variant->getPrice());
+
+        $this->setExpectedException('\InvalidArgumentException');
+
+        $this->variant->setPrice(4.1 * 100);
+        $this->variant->setPrice('410');
+        $this->variant->setPrice(round(4.1 * 100));
+        $this->variant->setPrice(array(410));
+        $this->variant->setPrice(new \stdClass());
+    }
 }

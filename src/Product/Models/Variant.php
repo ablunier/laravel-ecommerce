@@ -223,23 +223,7 @@ class Variant extends Model implements VariantInterface
      */
     public function isAvailableOnDemand()
     {
-
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOnHold()
-    {
-
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setOnHold($onHold)
-    {
-
+        return $this->available_on_demand;
     }
 
     /**

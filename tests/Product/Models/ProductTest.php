@@ -75,7 +75,7 @@ class ProductTest extends TestBase
     public function test_adds_removes_property()
     {
         $property = Mockery::mock('ANavallaSuiza\Ecommerce\Product\Models\PropertyValue');
-        $property->shouldReceive('setProduct')->once()->with($this->product);
+        $property->shouldReceive('setSubject')->once()->with($this->product);
         $property->shouldReceive('getKey')->andReturn(1);
 
         $this->product->addProperty($property);

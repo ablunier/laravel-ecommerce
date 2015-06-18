@@ -2,6 +2,7 @@
 namespace ANavallaSuiza\Ecommerce\Product\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use ANavallaSuiza\Ecommerce\Product\Observer\PropertyValueObserver;
 
 class PropertyValue extends Model implements PropertyValueInterface
 {
@@ -13,6 +14,13 @@ class PropertyValue extends Model implements PropertyValueInterface
     protected $table = 'products_properties_values';
 
     public $timestamps = false;
+
+    /*public static function boot()
+    {
+        parent::boot();
+
+        parent::observe(new PropertyValueObserver());
+    }*/
 
     public function product()
     {

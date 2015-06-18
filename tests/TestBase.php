@@ -30,6 +30,8 @@ class TestBase extends TestCase
             'database' => ':memory:',
             'prefix'    => ''
         ]);
+
+        $app['config']->set('translatable.locales', ['en']);
     }
 
     private function resetDatabase()

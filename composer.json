@@ -11,7 +11,8 @@
         "php": ">=5.4.0",
         "illuminate/support": "5.0.*",
         "illuminate/database": "5.0.*",
-        "dimsav/laravel-translatable": "5.1"
+        "dimsav/laravel-translatable": "5.1",
+        "javiereguiluz/easyslugger": "1.0.*"
     },
     "require-dev": {
         "orchestra/testbench": "~3.0",

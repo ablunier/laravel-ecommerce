@@ -5,6 +5,8 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Dimsav\Translatable\Translatable;
+use EasySlugger\Slugger;
+use App;
 
 class Product extends Model implements ProductInterface, VariableInterface, PropertySubjectInterface
 {
@@ -17,18 +19,53 @@ class Product extends Model implements ProductInterface, VariableInterface, Prop
      */
     protected $table = 'products';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['name'];
+
     protected $dates = ['deleted_at', 'available_on'];
 
-    public $translatedAttributes = ['slug', 'name', 'description', 'meta_keywords', 'meta_description'];
+    public $translatedAttributes = ['slug', 'name', 'short_description', 'description', 'meta_keywords', 'meta_description'];
 
     /**
      * Constructor.
      */
-    public function __construct()
+    public function __construct(array $attributes = array())
     {
         $this->available_on = new \DateTime();
 
-        parent::__construct();
+        parent::__construct($attributes);
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        self::saving(function ($row) {
+            if (is_null($row->slug)) {
+                $row->slug = $row->name;
+            }
+
+            $row->slug = Slugger::slugify($row->slug);
+        });
+    }
+
+    public static function firstOrNewByName($name)
+    {
+        $instance = static::whereHas('translations', function ($query) use ($name) {
+            $query->where('name', 'LIKE', $name);
+        })->first();
+
+        if (! is_null($instance)) {
+            return $instance;
+        }
+
+        return static::create([
+            App::getLocale() => ['name' => $name]
+        ]);
     }
 
     /**
@@ -291,7 +328,7 @@ class Product extends Model implements ProductInterface, VariableInterface, Prop
     public function addProperty(PropertyValueInterface $property)
     {
         if (! $this->hasProperty($property)) {
-            $property->setProduct($this);
+            $property->setSubject($this);
             $this->properties->push($property);
         }
 

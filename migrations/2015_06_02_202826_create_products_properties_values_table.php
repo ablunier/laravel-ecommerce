@@ -18,7 +18,7 @@ class CreateProductsPropertiesValuesTable extends Migration
             $table->string('value');
 
             $table->unsignedInteger('product_id');
-            $table->unsignedInteger('product_property_id');
+            $table->unsignedInteger('property_id');
         });
 
         Schema::table('products_properties_values', function (Blueprint $table) {
@@ -26,7 +26,7 @@ class CreateProductsPropertiesValuesTable extends Migration
                 ->references('id')->on('products')
                 ->onDelete('cascade');
 
-            $table->foreign('product_property_id')
+            $table->foreign('property_id')
                 ->references('id')->on('products_properties');
         });
     }

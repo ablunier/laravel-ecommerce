@@ -29,9 +29,10 @@ class CreateProductsTable extends Migration
 
             $table->string('slug');
             $table->string('name');
-            $table->text('description');
-            $table->string('meta_keywords');
-            $table->string('meta_description');
+            $table->text('short_description')->nullable();
+            $table->text('description')->nullable();
+            $table->string('meta_keywords')->nullable();
+            $table->string('meta_description')->nullable();
 
             $table->unique(['product_id','locale']);
         });

@@ -15,6 +15,13 @@ class Property extends Model implements PropertyInterface
      */
     protected $table = 'products_properties';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['name'];
+
     public $timestamps = false;
 
     public $translatedAttributes = ['presentation'];

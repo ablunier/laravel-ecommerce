@@ -21,16 +21,16 @@ class CreateProductsPropertiesTable extends Migration
         Schema::create('products_properties_translations', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->unsignedInteger('product_property_id');
+            $table->unsignedInteger('property_id');
             $table->string('locale')->index();
 
             $table->string('presentation');
 
-            $table->unique(['product_property_id','locale']);
+            $table->unique(['property_id','locale']);
         });
 
         Schema::table('products_properties_translations', function (Blueprint $table) {
-            $table->foreign('product_property_id')
+            $table->foreign('property_id')
                 ->references('id')->on('products_properties')
                 ->onDelete('cascade');
         });

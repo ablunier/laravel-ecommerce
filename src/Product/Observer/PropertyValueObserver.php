@@ -5,6 +5,6 @@ class PropertyValueObserver
 {
     public function creating($model)
     {
-        //$model->property->save();
+        $model->property->save();
     }
 }

@@ -15,12 +15,12 @@ class PropertyValue extends Model implements PropertyValueInterface
 
     public $timestamps = false;
 
-    /*public static function boot()
+    public static function boot()
     {
         parent::boot();
 
         parent::observe(new PropertyValueObserver());
-    }*/
+    }
 
     public function product()
     {

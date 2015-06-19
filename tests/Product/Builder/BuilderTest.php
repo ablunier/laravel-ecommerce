@@ -23,7 +23,13 @@ class BuilderTest extends TestBase
         return App::make('ANavallaSuiza\Ecommerce\Product\Builder\ProductBuilder');
     }
 
-    /*public function test_creates_property_if_it_does_not_exist() {
+    public function test_saves_product()
+    {
+
+    }
+
+    public function test_creates_property_if_it_does_not_exist()
+    {
         $productName = 'GitHub T-Shirt';
 
         $this->productBuilder->build($productName)
@@ -32,6 +38,9 @@ class BuilderTest extends TestBase
 
         $product = Product::firstOrNewByName($productName);
 
-        dd($product->getProperties());
-    }*/
+        $properties = $product->getProperties();
+
+        $this->assertEquals(2015, $properties->first()->getValue());
+        $this->assertEquals('Collection', $properties->first()->getProperty()->name);
+    }
 }

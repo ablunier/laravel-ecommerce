@@ -4,6 +4,7 @@ namespace ANavallaSuiza\Ecommerce\Product\Builder;
 use ANavallaSuiza\Ecommerce\Product\Models\Product;
 use ANavallaSuiza\Ecommerce\Product\Models\Property;
 use ANavallaSuiza\Ecommerce\Product\Models\PropertyValue;
+use DB;
 
 class ProductBuilder implements ProductBuilderInterface
 {
@@ -38,6 +39,8 @@ class ProductBuilder implements ProductBuilderInterface
      */
     public function build($name)
     {
+        DB::beginTransaction();
+
         $this->product = Product::firstOrNewByName($name);
 
         return $this;
@@ -56,6 +59,9 @@ class ProductBuilder implements ProductBuilderInterface
 
         $propertyValue->value = $value;
         $propertyValue->property()->associate($property);
+        $propertyValue->product()->associate($this->product);
+
+        $propertyValue->save();
 
         $this->product->addProperty($propertyValue);
 
@@ -67,6 +73,8 @@ class ProductBuilder implements ProductBuilderInterface
      */
     public function save()
     {
-        $this->product->push();
+        $this->product->save();
+
+        DB::commit();
     }
 }

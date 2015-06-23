@@ -23,11 +23,6 @@ class BuilderTest extends TestBase
         return App::make('ANavallaSuiza\Ecommerce\Product\Builder\ProductBuilder');
     }
 
-    public function test_saves_product()
-    {
-
-    }
-
     public function test_creates_property_if_it_does_not_exist()
     {
         $productName = 'GitHub T-Shirt';

@@ -21,7 +21,11 @@ class StoreServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/../config/config.php' => config_path('ans-ecommerce.php')
-        ]);
+        ], 'config');
+
+        $this->publishes([
+            __DIR__ . '/../migrations/' => base_path('/database/migrations')
+        ], 'migrations');
     }
 
     /**

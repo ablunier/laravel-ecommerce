@@ -7,7 +7,7 @@ use App;
 use ANavallaSuiza\Ecommerce\Product\Builder\ProductBuilder;
 use ANavallaSuiza\Ecommerce\Product\Models\Product;
 
-class BuilderTest extends TestBase
+class ProductBuilderTest extends TestBase
 {
     protected $productBuilder;
 
@@ -21,6 +21,18 @@ class BuilderTest extends TestBase
     private function getInstance()
     {
         return App::make('ANavallaSuiza\Ecommerce\Product\Builder\ProductBuilder');
+    }
+
+    public function test_creates_product()
+    {
+        $productName = 'GitHub T-Shirt';
+
+        $this->productBuilder->build($productName)
+            ->save();
+
+        $product = Product::firstOrNewByName($productName);
+
+        $this->assertEquals($productName, $product->name);
     }
 
     public function test_creates_property_if_it_does_not_exist()

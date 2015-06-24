@@ -26,7 +26,7 @@ class CreateProductsOptionsValuesTable extends Migration
 
             $table->string('value');
 
-            $table->unique(['product_option_value_id','locale']);
+            $table->unique(['product_option_value_id','locale'], 'options_values_translations_id_locale_unique');
         });
 
         Schema::table('products_options_values', function (Blueprint $table) {
@@ -36,7 +36,7 @@ class CreateProductsOptionsValuesTable extends Migration
         });
 
         Schema::table('products_options_values_translations', function (Blueprint $table) {
-            $table->foreign('product_option_value_id')
+            $table->foreign('product_option_value_id', 'option_value_translation_id_foreign')
                 ->references('id')->on('products_options_values')
                 ->onDelete('cascade');
         });

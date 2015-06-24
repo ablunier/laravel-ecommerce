@@ -54,7 +54,8 @@ class StoreServiceProvider extends ServiceProvider
     public function provides()
     {
         return [
-            'ANavallaSuiza\Ecommerce\Product\Models\ProductInterface'
+            'ANavallaSuiza\Ecommerce\Product\Models\ProductInterface',
+            'ANavallaSuiza\Ecommerce\Product\Builder\ProductBuilderInterface'
         ];
     }
 }

@@ -19,6 +19,16 @@ interface ProductBuilderInterface
     public function build($name);
 
     /**
+     * Add attribute value.
+     *
+     * @param string $name
+     * @param mixed  $value
+     *
+     * @return ProductBuilderInterface
+     */
+    public function addAttribute($name, $value);
+
+    /**
      * Add property with name and value.
      *
      * @param string $name

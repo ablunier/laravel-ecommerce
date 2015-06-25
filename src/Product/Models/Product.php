@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Dimsav\Translatable\Translatable;
-use EasySlugger\Slugger;
+use ANavallaSuiza\Ecommerce\Product\Observer\ProductObserver;
 use App;
 
 class Product extends Model implements ProductInterface, VariableInterface, PropertySubjectInterface
@@ -44,16 +44,10 @@ class Product extends Model implements ProductInterface, VariableInterface, Prop
     {
         parent::boot();
 
-        self::saving(function ($row) {
-            if (is_null($row->slug)) {
-                $row->slug = $row->name;
-            }
-
-            $row->slug = Slugger::slugify($row->slug);
-        });
+        parent::observe(new ProductObserver());
     }
 
-    public static function firstOrNewByName($name)
+    public static function firstOrCreateByName($name)
     {
         $instance = static::whereHas('translations', function ($query) use ($name) {
             $query->where('name', 'LIKE', $name);
@@ -364,7 +358,13 @@ class Product extends Model implements ProductInterface, VariableInterface, Prop
      */
     public function hasPropertyByName($propertyName)
     {
+        foreach ($this->properties as $item) {
+            if ($item->getProperty()->name === $propertyName) {
+                return true;
+            }
+        }
 
+        return false;
     }
 
     /**
@@ -372,6 +372,12 @@ class Product extends Model implements ProductInterface, VariableInterface, Prop
      */
     public function getPropertyByName($propertyName)
     {
+        foreach ($this->properties as $item) {
+            if ($item->getProperty()->name === $propertyName) {
+                return $item;
+            }
+        }
 
+        return null;
     }
 }

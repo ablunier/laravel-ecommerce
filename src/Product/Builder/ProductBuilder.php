@@ -41,7 +41,17 @@ class ProductBuilder implements ProductBuilderInterface
     {
         DB::beginTransaction();
 
-        $this->product = Product::firstOrNewByName($name);
+        $this->product = Product::firstOrCreateByName($name);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addAttribute($name, $value)
+    {
+        $this->product->setAttribute($name, $value);
 
         return $this;
     }

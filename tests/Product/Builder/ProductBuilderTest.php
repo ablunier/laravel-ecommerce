@@ -28,22 +28,23 @@ class ProductBuilderTest extends TestBase
         $productName = 'GitHub T-Shirt';
 
         $this->productBuilder->build($productName)
+            ->addAttribute('description', 'Awesome description')
             ->save();
 
-        $product = Product::firstOrNewByName($productName);
+        $product = Product::firstOrCreateByName($productName);
 
         $this->assertEquals($productName, $product->name);
     }
 
     public function test_creates_property_if_it_does_not_exist()
     {
-        $productName = 'GitHub T-Shirt';
+        $productName = 'GitHub T-Shirt 2';
 
         $this->productBuilder->build($productName)
             ->addProperty('Collection', 2015)
             ->save();
 
-        $product = Product::firstOrNewByName($productName);
+        $product = Product::firstOrCreateByName($productName);
 
         $properties = $product->getProperties();
 

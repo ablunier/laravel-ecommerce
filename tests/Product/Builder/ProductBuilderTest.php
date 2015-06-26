@@ -4,6 +4,7 @@ namespace ANavallaSuiza\Tests\Product\Models;
 use ANavallaSuiza\Tests\TestBase;
 use Mockery;
 use App;
+use DB;
 use ANavallaSuiza\Ecommerce\Product\Builder\ProductBuilder;
 use ANavallaSuiza\Ecommerce\Product\Models\Product;
 
@@ -38,7 +39,7 @@ class ProductBuilderTest extends TestBase
 
     public function test_creates_property_if_it_does_not_exist()
     {
-        $productName = 'GitHub T-Shirt 2';
+        $productName = 'GitHub T-Shirt';
 
         $this->productBuilder->build($productName)
             ->addProperty('Collection', 2015)

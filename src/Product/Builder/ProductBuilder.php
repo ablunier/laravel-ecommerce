@@ -4,6 +4,7 @@ namespace ANavallaSuiza\Ecommerce\Product\Builder;
 use ANavallaSuiza\Ecommerce\Product\Models\Product;
 use ANavallaSuiza\Ecommerce\Product\Models\Property;
 use ANavallaSuiza\Ecommerce\Product\Models\PropertyValue;
+use ANavallaSuiza\Ecommerce\Product\Models\Variant;
 use DB;
 
 class ProductBuilder implements ProductBuilderInterface
@@ -37,13 +38,27 @@ class ProductBuilder implements ProductBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function build($name)
+    public function build($name, $sku, $price, $stockQty)
     {
         DB::beginTransaction();
 
         $this->product = Product::firstOrCreateByName($name);
 
-        return $this;
+        // Set Base Varient
+        $variant = new Variant;
+
+        $variant->sku = $sku;
+        $variant->price = $price;
+        $variant->on_hand = $stockQty;
+        $variant->product_id = $this->product->id;
+        $variant->master = true;
+
+        if ($variant->save()) {
+            return $this;
+        }
+
+        DB::rollBack();
+        return false;
     }
 
     /**
@@ -86,5 +101,7 @@ class ProductBuilder implements ProductBuilderInterface
         $this->product->save();
 
         DB::commit();
+
+        return $this->product;
     }
 }

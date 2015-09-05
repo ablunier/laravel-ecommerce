@@ -16,7 +16,7 @@ interface ProductBuilderInterface
      *
      * @return ProductBuilderInterface
      */
-    public function build($name);
+    public function build($name, $sku, $price, $stockQty);
 
     /**
      * Add attribute value.

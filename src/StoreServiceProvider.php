@@ -24,7 +24,7 @@ class StoreServiceProvider extends ServiceProvider
         ], 'config');
 
         $this->publishes([
-            __DIR__ . '/../migrations/' => base_path('/database/migrations/store')
+            __DIR__ . '/../migrations/' => base_path('/database/migrations')
         ], 'migrations');
     }
 

@@ -40,13 +40,6 @@ class Product extends Model implements ProductInterface, VariableInterface, Prop
         parent::__construct($attributes);
     }
 
-    public static function boot()
-    {
-        parent::boot();
-
-        parent::observe(new ProductObserver());
-    }
-
     public static function firstOrCreateByName($name)
     {
         $instance = static::whereHas('translations', function ($query) use ($name) {

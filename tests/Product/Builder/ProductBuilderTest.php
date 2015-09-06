@@ -11,6 +11,7 @@ use ANavallaSuiza\Ecommerce\Product\Models\Product;
 class ProductBuilderTest extends TestBase
 {
     protected $productBuilder;
+    protected $product;
 
     public function setUp()
     {
@@ -35,12 +36,12 @@ class ProductBuilderTest extends TestBase
             ->addAttribute('description', 'Awesome description')
             ->save();
 
-        $product = Product::firstOrCreateByName($productName);
+        $this->product = Product::firstOrCreateByName($productName);
 
-        $this->assertEquals($productName, $product->name);
-        $this->assertEquals($price, $product->getPrice());
-        $this->assertEquals($SKU, $product->getSku());
-        $this->assertEquals(true, $product->getMasterVariant()->isInStock());
+        $this->assertEquals($productName, $this->product->name);
+        $this->assertEquals($price, $this->product->getPrice());
+        $this->assertEquals($SKU, $this->product->getSku());
+        $this->assertEquals(true, $this->product->getMasterVariant()->isInStock());
     }
 
     public function test_creates_property_if_it_does_not_exist()
@@ -50,14 +51,12 @@ class ProductBuilderTest extends TestBase
         $price = 100;
         $stock = 100;
 
-        $this->productBuilder->build($productName, $SKU, $price, $stock)
+        $this->product = $this->productBuilder->build($productName, $SKU, $price, $stock)
             ->addAttribute('description', 'Awesome description')
             ->addProperty('Collection', 2015)
             ->save();
 
-        $product = Product::firstOrCreateByName($productName);
-
-        $properties = $product->getProperties();
+        $properties = $this->product->getProperties();
 
         $this->assertEquals(2015, $properties->first()->getValue());
         $this->assertEquals('Collection', $properties->first()->getProperty()->name);

@@ -54,12 +54,9 @@ class ProductBuilder implements ProductBuilderInterface
         $variant->master = true;
         $variant->available_on_demand = false;
 
-        if ($variant->save()) {
-            return $this;
-        }
+        $variant->save();
 
-        DB::rollBack();
-        return false;
+        return $this;
     }
 
     /**

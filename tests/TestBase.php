@@ -6,7 +6,7 @@ use DB;
 
 class TestBase extends TestCase
 {
-    const MIGRATIONS_PATH = 'migrations';
+    const MIGRATIONS_PATH = 'ecom/migrations';
 
     public function setUp()
     {
@@ -21,7 +21,7 @@ class TestBase extends TestCase
     }
     protected function getEnvironmentSetUp($app)
     {
-        $app['path.base'] = __DIR__.'/..';
+        $app['path.base'] = __DIR__.'/../..';
 
         $app['config']->set('database.default', 'sqlite');
 

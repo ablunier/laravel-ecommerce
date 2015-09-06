@@ -52,6 +52,7 @@ class ProductBuilder implements ProductBuilderInterface
         $variant->on_hand = $stockQty;
         $variant->product_id = $this->product->id;
         $variant->master = true;
+        $variant->available_on_demand = false;
 
         if ($variant->save()) {
             return $this;

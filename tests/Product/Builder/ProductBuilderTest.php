@@ -27,21 +27,31 @@ class ProductBuilderTest extends TestBase
     public function test_creates_product()
     {
         $productName = 'GitHub T-Shirt';
+        $SKU = 'SKU99';
+        $price = 100;
+        $stock = 100;
 
-        $this->productBuilder->build($productName)
+        $this->productBuilder->build($productName, $SKU, $price, $stock)
             ->addAttribute('description', 'Awesome description')
             ->save();
 
         $product = Product::firstOrCreateByName($productName);
 
         $this->assertEquals($productName, $product->name);
+        $this->assertEquals($price, $product->getPrice());
+        $this->assertEquals($SKU, $product->getSku());
+        $this->assertEquals(true, $product->getMasterVariant()->isInStock());
     }
 
     public function test_creates_property_if_it_does_not_exist()
     {
         $productName = 'GitHub T-Shirt';
+        $SKU = 'SKU99';
+        $price = 100;
+        $stock = 100;
 
-        $this->productBuilder->build($productName)
+        $this->productBuilder->build($productName, $SKU, $price, $stock)
+            ->addAttribute('description', 'Awesome description')
             ->addProperty('Collection', 2015)
             ->save();
 

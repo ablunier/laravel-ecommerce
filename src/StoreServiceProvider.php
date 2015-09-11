@@ -1,6 +1,8 @@
 <?php
 namespace ANavallaSuiza\Ecommerce;
 
+use ANavallaSuiza\Ecommerce\Product\Models\Product;
+use ANavallaSuiza\Ecommerce\Product\Observer\ProductObserver;
 use Illuminate\Support\ServiceProvider;
 
 class StoreServiceProvider extends ServiceProvider
@@ -24,8 +26,11 @@ class StoreServiceProvider extends ServiceProvider
         ], 'config');
 
         $this->publishes([
-            __DIR__ . '/../migrations/' => base_path('/database/migrations/store')
+            __DIR__ . '/../migrations/' => base_path('/database/migrations')
         ], 'migrations');
+
+        // Register Model Events
+        Product::observe(new ProductObserver());
     }
 
     /**
